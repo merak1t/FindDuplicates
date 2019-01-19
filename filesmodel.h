@@ -39,14 +39,14 @@ public slots:
 
 signals:
     void scan_directory(QString const& directory);
-    void scan_ended(int files_scanned);
-    void scan_update(int files_scanned);
-    void calculate_hash(Model* file);
+    void end_scan(int files_scanned);
+    void progress_update(int files_scanned);
+    void calc_hash(Model* file);
 
 private:
     QMap<QByteArray, int> hash_to_index;
-    QMap<qint64, Model*> size_to_ptr;
-    QVector<Model*> grouped_files;
+    QMap<qint64, Model*> size_to_model;
+    QVector<Model*> groups;
     QThread worker_thread;
     HashWorker* worker;
 
@@ -55,10 +55,10 @@ private:
 
     int total_files;
     int rehashing_files;
-    bool notify_ended;
+    bool end_flag;
 
-    Model* get_and_remove_file_from_unique(QMap<QByteArray, int>::iterator const&);
-    void add_file_to_group(Model* file, Model* group, int parent_pos);
+    Model* change_group(QMap<QByteArray, int>::iterator const&);
+    void add_to_group(Model* file, Model* group, int parent_pos);
 
     QElapsedTimer timer;
 };

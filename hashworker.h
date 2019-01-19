@@ -37,12 +37,12 @@ public slots:
     void get_hash(Model* file);
 
 signals:
-    void file_processed(Model* file);
+    void file_add(Model* file);
     void calc_hash(Model* file);
     void end_scan();
 
 private:
-    QAtomicInt interrupt_flag;
+    QAtomicInt stop_flag;
     QCryptographicHash hash;
     int bad_files;
 };

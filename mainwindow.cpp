@@ -28,8 +28,8 @@ MainWindow::MainWindow(QWidget *parent) :
     FilesModel* model = new FilesModel();
     ui->treeView->setModel(model);
 
-    connect(model, &FilesModel::scan_ended, this, &MainWindow::set_progress_complete);
-    connect(model, &FilesModel::scan_update, this, &MainWindow::set_progress_update);
+    connect(model, &FilesModel::end_scan, this, &MainWindow::set_progress_complete);
+    connect(model, &FilesModel::progress_update, this, &MainWindow::set_progress_update);
     connect(this, &MainWindow::scan_directory, model, &FilesModel::start_scan);
     connect(this, &MainWindow::abort_scan, model, &FilesModel::stop_scan);
     connect(this, &MainWindow::delete_file, model, &FilesModel::delete_file);

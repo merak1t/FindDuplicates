@@ -2,12 +2,12 @@
 
 #include <QDirIterator>
 
-HashWorker::HashWorker(QObject *parent) : interrupt_flag(0), hash(QCryptographicHash::Algorithm::Sha3_512), bad_files(-1) {}
+HashWorker::HashWorker(QObject *parent) : stop_flag(0), hash(QCryptographicHash::Algorithm::Sha3_512), bad_files(-1) {}
 
 HashWorker::~HashWorker() {}
 
 void HashWorker::process(QString const& directory) {
-    interrupt_flag = 0;
+    stop_flag = 0;
     bad_files = -1;
 
     QDirIterator it(directory, QDir::Files | QDir::NoDotAndDotDot | QDir::NoSymLinks, QDirIterator::Subdirectories);
@@ -23,8 +23,8 @@ void HashWorker::process(QString const& directory) {
             bad_files--;
         }
 
-        if (interrupt_flag == 0) {
-            emit file_processed(file_node);
+        if (stop_flag == 0) {
+            emit file_add(file_node);
         } else {
             delete file_node;
             return;
@@ -35,7 +35,7 @@ void HashWorker::process(QString const& directory) {
 }
 
 void HashWorker::get_hash(Model* file_node) {
-    if (interrupt_flag == 1) {
+    if (stop_flag == 1) {
         delete file_node;
         return;
     }
@@ -45,18 +45,18 @@ void HashWorker::get_hash(Model* file_node) {
 
     hash.reset();
     hash.addData(&file);
-    auto file_hash = hash.result().toHex();
+
+    QByteArray file_hash = hash.result().toHex();
 
     file_node->hash = file_hash;
     file_node->hashed = true;
-    if (interrupt_flag == 0) {
-        emit file_processed(file_node);
+    if (stop_flag == 0) {
+        emit file_add(file_node);
     } else {
         delete file_node;
-        return;
     }
 }
 
 void HashWorker::stop() {
-    interrupt_flag = 1;
+    stop_flag = 1;
 }
