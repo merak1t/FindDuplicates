@@ -17,7 +17,7 @@ void HashWorker::process(QString const& directory) {
 
         Model* file_node = new Model(name, file.size());
 
-        if (!(file.permissions() & QFileDevice::Permission::ReadUser)) {
+        if (!(QFileDevice::Permission::ReadUser & file.permissions())) {
             file_node->hash = QString::number(bad_files).toUtf8();
             file_node->hashed = true;
             bad_files--;

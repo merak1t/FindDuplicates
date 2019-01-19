@@ -6,7 +6,7 @@
 
 FilesModel::FilesModel() :
     QAbstractItemModel(nullptr),
-    worker_thread(),
+    thread(),
     unique_group(new Model("Unique files", -1)),
     total_files(0),
     rehashing_files(0),
@@ -15,12 +15,12 @@ FilesModel::FilesModel() :
 {
     unique_group->isFile = false;
     worker = new HashWorker();
-    worker->moveToThread(&worker_thread);
+    worker->moveToThread(&thread);
     connect(this, &FilesModel::scan_directory, worker, &HashWorker::process);
     connect(this, &FilesModel::calc_hash, worker, &HashWorker::get_hash);
     connect(worker, &HashWorker::file_add, this, &FilesModel::add_file);
     connect(worker, &HashWorker::end_scan, this, &FilesModel::no_more_files);
-    worker_thread.start();
+    thread.start();
 }
 
 FilesModel::~FilesModel() {

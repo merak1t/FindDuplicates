@@ -47,7 +47,7 @@ private:
     QMap<QByteArray, int> hash_to_index;
     QMap<qint64, Model*> size_to_model;
     QVector<Model*> groups;
-    QThread worker_thread;
+    QThread thread;
     HashWorker* worker;
 
     Model* unique_group;

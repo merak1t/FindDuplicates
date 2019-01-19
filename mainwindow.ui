@@ -6,31 +6,31 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>769</width>
-    <height>646</height>
+    <width>875</width>
+    <height>669</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Find Duplicates</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QWidget" name="gridLayoutWidget">
-    <property name="geometry">
-     <rect>
-      <x>30</x>
-      <y>50</y>
-      <width>711</width>
-      <height>531</height>
-     </rect>
-    </property>
-    <layout class="QGridLayout" name="gridLayout">
-     <item row="0" column="0">
-      <widget class="QListView" name="lvSource"/>
-     </item>
-     <item row="1" column="0">
-      <widget class="QPushButton" name="btn_start">
-       <property name="styleSheet">
-        <string notr="true">float: right;
+   <layout class="QGridLayout" name="gridLayout_2">
+    <item row="0" column="0">
+     <widget class="QProgressBar" name="progressBar">
+      <property name="value">
+       <number>24</number>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="0">
+     <layout class="QGridLayout" name="gridLayout">
+      <item row="0" column="0">
+       <widget class="QListView" name="lvSource"/>
+      </item>
+      <item row="1" column="0">
+       <widget class="QPushButton" name="btn_start">
+        <property name="styleSheet">
+         <string notr="true">float: right;
 margin-right: 3%;
 margin-top: 5px;
 border-radius: 5px;
@@ -43,16 +43,16 @@ text-shadow: #454545 0 0 2px;
 border-bottom: 4px solid rgb(69, 134,  1);
 color: white;
 font-family: 'Roboto Slab', serif;</string>
-       </property>
-       <property name="text">
-        <string>Поиск</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="1">
-      <widget class="QPushButton" name="btn_stop">
-       <property name="styleSheet">
-        <string notr="true">float: right;
+        </property>
+        <property name="text">
+         <string>Поиск</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QPushButton" name="btn_stop">
+        <property name="styleSheet">
+         <string notr="true">float: right;
 margin-right: 3%;
 margin-top: 5px;
 border-radius: 5px;
@@ -65,37 +65,32 @@ text-shadow: #454545 0 0 2px;
 border-bottom: 4px solid rgba(217, 91, 72, 1);
 color: white;
 font-family: 'Roboto Slab', serif;</string>
-       </property>
-       <property name="text">
-        <string>Отмена</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="1">
-      <widget class="QTreeView" name="treeView"/>
-     </item>
-    </layout>
-   </widget>
-   <widget class="QProgressBar" name="progressBar">
-    <property name="geometry">
-     <rect>
-      <x>30</x>
-      <y>10</y>
-      <width>711</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="value">
-     <number>24</number>
-    </property>
-   </widget>
+        </property>
+        <property name="text">
+         <string>Отмена</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QTreeView" name="treeView">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>769</width>
+     <width>875</width>
      <height>22</height>
     </rect>
    </property>
